@@ -1,0 +1,32 @@
+import csv
+ 
+FILENAME = "users.csv"
+ 
+users = [
+    {"name": "i2c", "port": 1},
+    {"name": "wire", "port": 2},
+    {"name": "i2c", "port": 3},
+    {"name": "spi", "port": 4},
+    {"name": "wire", "port": 5}
+]
+with open(FILENAME, "w", newline="") as file:
+    columns = ["name", "port"]
+    writer = csv.DictWriter(file, fieldnames=columns)
+    writer.writeheader()
+
+    writer.writerows(users)
+     
+    user = {"name" : "spi", "port": 6}
+    writer.writerow(user)
+ 
+with open(FILENAME, "r", newline="") as file:
+    reader = csv.DictReader(file)
+
+    for i in reader:
+        if i["name"] == 'i2c':
+            print(i["name"],'-', i["port"])
+        elif i["name"] == "spi":
+            print(i["name"],'-', i["port"])
+        elif i["name"] == "wire":
+            print(i["name"],'-', i["port"])
+
